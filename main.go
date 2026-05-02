@@ -16,8 +16,8 @@ import (
 )
 
 type Response struct {
-    Gold18   []Item `json:"gold18"`
-    Silver999 []Item `json:"silver999"`
+    Gold18   Item `json:"gold18"`
+    Silver999 Item `json:"silver999"`
 }
 
 type Item struct {
@@ -212,7 +212,7 @@ func fetchDigiGoldData() ([]Currency, error) {
 	data = append(data, Currency{
         Code:  "DigiGold",
         Name:  "طلای دیجی کالا",
-        Price: float64(data2.Gold18[0].Price),
+        Price: float64(data2.Gold18.Price),
         Icon:  "https://www.digikala.com/wealth/static/img/svg/gold-logo.svg",
         En:    "DigiGold",
         })
