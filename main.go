@@ -187,11 +187,7 @@ func fetchDigiGoldData() ([]Currency, error) {
     defer resp.Body.Close()
 
     // بررسی وضعیت پاسخ
-    if resp.StatusCode != http.StatusOK {
-        return 0, fmt.Errorf("وضعیت ناموفق: %s", resp.Status)
-    //return 0, errors.New(resp.Status)
-}
-
+    
 
     // خواندن بدنه پاسخ
     body, err := io.ReadAll(resp.Body)
