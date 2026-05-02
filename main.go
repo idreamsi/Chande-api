@@ -212,7 +212,7 @@ func fetchDigiGoldData() ([]Currency, error) {
 	data = append(data, Currency{
         Code:  "DigiGold",
         Name:  "طلای دیجی کالا",
-        Price: data2.Gold18.Price,
+        Price: data2.Gold18[0].Price,
         Icon:  "https://www.digikala.com/wealth/static/img/svg/gold-logo.svg",
         En:    "DigiGold",
         })
