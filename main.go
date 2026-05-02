@@ -16,13 +16,13 @@ import (
 )
 
 type Response struct {
-    Gold18   Item json:"gold18"
-    Silver999 Item json:"silver999"
+    Gold18   Item `json:"gold18"`
+    Silver999 Item `json:"silver999"`
 }
 
 type Item struct {
-    Price int json:"price"
-    TTL   int json:"ttl"
+    Price int `json:"price"`
+    TTL   int `json:"ttl"`
 }
 
 type Currency struct {
