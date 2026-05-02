@@ -351,7 +351,7 @@ func main() {
     }
 
     finalData := append(append(currencies, golds...), cryptos...)
-    finalData := append(digigold, finalData...)
+    finalData = append(digigold, finalData...)
 
 
     output := FinalOutput{
