@@ -21,7 +21,7 @@ type Response struct {
 }
 
 type Item struct {
-    Price float64 `json:"price"`
+    Price int `json:"price"`
     TTL   int `json:"ttl"`
 }
 
@@ -212,7 +212,7 @@ func fetchDigiGoldData() ([]Currency, error) {
 	data = append(data, Currency{
         Code:  "DigiGold",
         Name:  "طلای دیجی کالا",
-        Price: data2.Gold18[0].Price,
+        Price: float64(data2.Gold18[0].Price),
         Icon:  "https://www.digikala.com/wealth/static/img/svg/gold-logo.svg",
         En:    "DigiGold",
         })
