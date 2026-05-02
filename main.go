@@ -207,7 +207,7 @@ func fetchDigiGoldData() ([]Currency, error) {
     // بازگرداندن قیمت gold18
     //return data.Gold18.Price, nil
 
-
+fmt.Println(float64(data2.Gold18.Price))
     var data []Currency
 	data = append(data, Currency{
         Code:  "DigiGold",
