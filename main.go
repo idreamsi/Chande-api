@@ -628,7 +628,7 @@ func main() {
     }
 
     var wg sync.WaitGroup
-    var currencies, golds, cryptos []Currency
+    var currencies, golds, cryptos, []Currency
     var err1, err2, err3 error
 
     wg.Add(3)
