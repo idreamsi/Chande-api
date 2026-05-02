@@ -197,7 +197,17 @@ func fetchDigiGoldData() ([]Currency, error) {
 		//return nil, err
         //return 0, fmt.Errorf("خطا در خواندن بدنه: %w", err)
     }
-
+	/*
+if resp.StatusCode != http.StatusOK {
+    body, _ := io.ReadAll(resp.Body)
+    return fmt.Errorf("وضعیت ناموفق: %s, بدنه: %s", resp.Status, string(body))
+}*/
+if strings.Contains(resp.Header.Get("Content-Type"), "application/json") == false {
+    fmt.Println("html: ",err)
+	fmt.Println("body: ",body)
+	
+	// شاید HTML است
+}
     // تجزیه JSON
     var data2 Response
     err = json.Unmarshal(body, &data2)
