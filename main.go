@@ -21,7 +21,7 @@ type Response struct {
 }
 
 type Item struct {
-    Price int `json:"price"`
+    Price float64 `json:"price"`
     TTL   int `json:"ttl"`
 }
 
