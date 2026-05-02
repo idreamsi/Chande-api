@@ -181,7 +181,8 @@ func fetchDigiGoldData() ([]Currency, error) {
     // درخواست HTTP GET
     resp, err := http.Get("https://api.digikala.com/non-inventory/v1/prices/")
     if err != nil {
-		return nil, err
+		fmt.Println("get: ",err)
+		//return nil, err
         //return 0, fmt.Errorf("خطا در ارسال درخواست: %w", err)
     }
     defer resp.Body.Close()
@@ -192,7 +193,8 @@ func fetchDigiGoldData() ([]Currency, error) {
     // خواندن بدنه پاسخ
     body, err := io.ReadAll(resp.Body)
     if err != nil {
-		return nil, err
+		fmt.Println("io: ",err)
+		//return nil, err
         //return 0, fmt.Errorf("خطا در خواندن بدنه: %w", err)
     }
 
@@ -200,7 +202,8 @@ func fetchDigiGoldData() ([]Currency, error) {
     var data2 Response
     err = json.Unmarshal(body, &data2)
     if err != nil {
-		return nil, err
+		fmt.Println("json: ",err)
+		//return nil, err
         //return 0, fmt.Errorf("خطا در تجزیه JSON: %w", err)
     }
 
@@ -338,7 +341,7 @@ func main() {
     wg.Wait()
 
     if err0 != nil {
-        fmt.Println("Error currency:", err0)
+        fmt.Println("Error digi:", err0)
     }
 	if err1 != nil {
         fmt.Println("Error currency:", err1)
