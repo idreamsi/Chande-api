@@ -213,7 +213,7 @@ func fetchDigiGoldData() ([]Currency, error) {
 //-----------------------------------------------------------------
 	
     // درخواست HTTP GET
-    resp, err := http.Get("https://api.digikala.com/non-inventory/v1/prices/")
+    resp, err := http.Get("https://idreams.ir/bus/gold/")
     if err != nil {
 		fmt.Println("get: ",err)
 		//return nil, err
