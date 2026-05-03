@@ -211,7 +211,7 @@ func fetchDigiGoldData() ([]Currency, error) {
     }
 	*/
 //-----------------------------------------------------------------
-	
+	/*
     // درخواست HTTP GET
     resp, err := http.Get("https://idreams.ir/bus/gold/index.php")
     if err != nil {
@@ -220,7 +220,35 @@ func fetchDigiGoldData() ([]Currency, error) {
         //return 0, fmt.Errorf("خطا در ارسال درخواست: %w", err)
     }
     defer resp.Body.Close()
+*/
+	//------------------------------------------------
+		client := &http.Client{
+		Timeout: 10 * time.Second, // زمان کل درخواست (اتصال + خواندن)
+		Transport: &http.Transport{
+			TLSClientConfig: &tls.Config{InsecureSkipVerify: true}, // فقط تست
+		},
+	}
+	
+	req, err := http.NewRequest("GET", "https://idreams.ir/bus/gold/index.php", nil)
+	if err != nil {
+		//outputError("خطا در ساخت درخواست", err.Error())
+		fmt.Println("get: ",err)
+		return nil, err
+	}
+	req.Header.Set("User-Agent", "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:130.0) Gecko/20100101 Firefox/130.0")
+	req.Header.Set("Accept", "application/json, text/plain, */*")
+	
+	resp, err := client.Do(req)
+	if err != nil {
+		// خطاهایی مثل timeout، DNS، refused و ...
+		fmt.Println("get2: ",err)
+		return nil, err
+	}
+	defer resp.Body.Close()
+	//-----------------------------------------------
 
+
+	
 /*
 	req, _ := http.NewRequest("GET", "https://idreams.ir/bus/gold/", nil)
     req.Header.Set("User-Agent", "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36")
