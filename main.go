@@ -188,7 +188,7 @@ func fetchDigiGoldData() ([]Currency, error) {
     respp, errr := client.Do(reqq)
     if errr != nil {
         fmt.Println("خطا در درخواست:", err)
-        return
+        return nil
     }
     defer respp.Body.Close()
 
