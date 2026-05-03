@@ -216,7 +216,7 @@ func fetchDigiGoldData() ([]Currency, error) {
     resp, err := http.Get("https://idreams.ir/bus/gold/index.php")
     if err != nil {
 		fmt.Println("get: ",err)
-		//return nil, err
+		return nil, err
         //return 0, fmt.Errorf("خطا در ارسال درخواست: %w", err)
     }
     defer resp.Body.Close()
