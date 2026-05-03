@@ -237,6 +237,11 @@ func fetchDigiGoldData() ([]Currency, error) {
 	//---------------------------------------------------
 	contentType := resp.Header.Get("Content-Type")
     fmt.Println("Content-Type:", contentType)
+	if strings.Contains(contentType, "application/json") {
+		fmt.Println("IS JSON")
+    } else {
+        fmt.Println("IS HTML")
+    }
 	//---------------------------------------------------
 	    // بررسی وضعیت پاسخ
     
