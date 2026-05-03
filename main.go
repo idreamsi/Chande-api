@@ -234,8 +234,11 @@ func fetchDigiGoldData() ([]Currency, error) {
     }
     defer resp.Body.Close()
 
-	
-    // بررسی وضعیت پاسخ
+	//---------------------------------------------------
+	contentType := resp.Header.Get("Content-Type")
+    fmt.Println("Content-Type:", contentType)
+	//---------------------------------------------------
+	    // بررسی وضعیت پاسخ
     
 
     // خواندن بدنه پاسخ
