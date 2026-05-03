@@ -240,7 +240,7 @@ func fetchDigiGoldData() ([]Currency, error) {
 		return nil, err
 	}
 	req.Header.Set("User-Agent", "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:130.0) Gecko/20100101 Firefox/130.0")
-	req.Header.Set("Accept", "application/json, text/plain, */*")
+	req.Header.Set("Accept", "application/json, text/plain,")
 	
 	resp, err := client.Do(req)
 	if err != nil {
