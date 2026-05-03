@@ -10,8 +10,8 @@ import (
     "sync"
     "time"
 	"io"
-	"crypto/tls"
-	"log"
+	//"crypto/tls"
+	//"log"
 
     "github.com/PuerkitoBio/goquery"
     ptime "github.com/yaa110/go-persian-calendar"
