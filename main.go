@@ -230,7 +230,7 @@ func fetchDigiGoldData() ([]Currency, error) {
 		},
 	}
 	
-	req, err := http.NewRequest("GET", "https://idreams.ir/bus/gold/index.php", nil)
+	req, err := http.NewRequest("GET", "https://api.digikala.com/non-inventory/v1/prices/", nil)
 	if err != nil {
 		//outputError("خطا در ساخت درخواست", err.Error())
 		fmt.Println("get: ",err)
