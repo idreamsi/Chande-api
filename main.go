@@ -15,7 +15,7 @@ import (
 
     "github.com/PuerkitoBio/goquery"
     ptime "github.com/yaa110/go-persian-calendar"
-	"github.com/skycheung803/go-bypasser"
+	//"github.com/skycheung803/go-bypasser"
 )
 
 type Response struct {
@@ -214,16 +214,16 @@ func fetchDigiGoldData() ([]Currency, error) {
     }
 	*/
 //-----------------------------------------------------------------
-	/*
+	
     // درخواست HTTP GET
-    resp, err := http.Get("https://idreams.ir/bus/gold/index.php")
+    resp, err := http.Get("https://idreams.ir/bus/gold/digigold.php")
     if err != nil {
 		fmt.Println("get: ",err)
 		return nil, err
         //return 0, fmt.Errorf("خطا در ارسال درخواست: %w", err)
     }
     defer resp.Body.Close()
-*/
+
 	//------------------------------------------------
 	/*
 		client := &http.Client{
@@ -251,43 +251,6 @@ func fetchDigiGoldData() ([]Currency, error) {
 	defer resp.Body.Close()
 */
 	
-
-	//-----------------------------------------------
-	bypass, err := bypasser.NewBypasser()
-    if err != nil {
-        fmt.Println("get0: ",err)
-		return nil, err
-    }
-
-    // 2. ایجاد HTTP client با Transport ساخته شده
-    client := &http.Client{
-        Timeout:   30 * time.Second,
-        Transport: bypass.Transport,
-    }
-
-    // 3. ساخت درخواست
-    url := "https://api.digikala.com/non-inventory/v1/prices/"
-    req, err := http.NewRequest("GET", url, nil)
-    if err != nil {
-        fmt.Println("get1: ",err)
-		return nil, err
-    }
-
-    // 4. تنظیم هدرهای واقعی
-    req.Header.Set("User-Agent", "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:130.0) Gecko/20100101 Firefox/130.0")
-    req.Header.Set("Accept", "application/json, text/plain, */*")
-    req.Header.Set("Accept-Language", "en-US,en;q=0.5")
-    req.Header.Set("Accept-Encoding", "gzip, deflate, br")
-    req.Header.Set("Connection", "keep-alive")
-
-    // 5. ارسال درخواست و دریافت پاسخ
-    resp, err := client.Do(req)
-    if err != nil {
-        fmt.Println("get2: ",err)
-		return nil, err
-    }
-    defer resp.Body.Close()
-	//-----------------------------------------------
 
 
 	
