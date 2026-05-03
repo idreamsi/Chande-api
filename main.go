@@ -179,7 +179,8 @@ func fetchDataCurrency(cm map[string]string) ([]Currency, error) {
 func fetchDigiGoldData() ([]Currency, error) {
 
 //-----------------------------------------------------------------
-    // 1. یک User-Agent واقعی برای مرورگر ست می‌کنیم
+    /*
+	// 1. یک User-Agent واقعی برای مرورگر ست می‌کنیم
     reqq, _ := http.NewRequest("GET", "https://api.digikala.com/non-inventory/v1/prices/", nil)
     reqq.Header.Set("User-Agent", "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36")
     reqq.Header.Set("Accept", "application/json") // صراحتاً اعلام می‌کنیم که JSON می‌خواهیم
@@ -208,8 +209,9 @@ func fetchDigiGoldData() ([]Currency, error) {
     } else {
         fmt.Println("BLOCKED")
     }
+	*/
 //-----------------------------------------------------------------
-	
+	/*
     // درخواست HTTP GET
     resp, err := http.Get("https://api.digikala.com/non-inventory/v1/prices/")
     if err != nil {
@@ -218,7 +220,21 @@ func fetchDigiGoldData() ([]Currency, error) {
         //return 0, fmt.Errorf("خطا در ارسال درخواست: %w", err)
     }
     defer resp.Body.Close()
+*/
 
+	req, _ := http.NewRequest("GET", "https://api.digikala.com/non-inventory/v1/prices/", nil)
+    req.Header.Set("User-Agent", "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36")
+    req.Header.Set("Accept", "application/json") // صراحتاً اعلام می‌کنیم که JSON می‌خواهیم
+
+    client := &http.Client{}
+    resp, err := client.Do(req)
+    if err != nil {
+        fmt.Println("خطا در درخواست:", err)
+        //return nil
+    }
+    defer resp.Body.Close()
+
+	
     // بررسی وضعیت پاسخ
     
 
