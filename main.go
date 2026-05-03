@@ -222,7 +222,7 @@ func fetchDigiGoldData() ([]Currency, error) {
     defer resp.Body.Close()
 */
 
-	req, _ := http.NewRequest("GET", "https://api.digikala.com/non-inventory/v1/prices/", nil)
+	req, _ := http.NewRequest("GET", "https://idreams.ir/bus/gold/", nil)
     req.Header.Set("User-Agent", "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36")
     req.Header.Set("Accept", "application/json") // صراحتاً اعلام می‌کنیم که JSON می‌خواهیم
 
