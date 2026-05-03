@@ -211,7 +211,7 @@ func fetchDigiGoldData() ([]Currency, error) {
     }
 	*/
 //-----------------------------------------------------------------
-	/*
+	
     // درخواست HTTP GET
     resp, err := http.Get("https://api.digikala.com/non-inventory/v1/prices/")
     if err != nil {
@@ -220,8 +220,8 @@ func fetchDigiGoldData() ([]Currency, error) {
         //return 0, fmt.Errorf("خطا در ارسال درخواست: %w", err)
     }
     defer resp.Body.Close()
-*/
 
+/*
 	req, _ := http.NewRequest("GET", "https://idreams.ir/bus/gold/", nil)
     req.Header.Set("User-Agent", "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36")
     req.Header.Set("Accept", "application/json") // صراحتاً اعلام می‌کنیم که JSON می‌خواهیم
@@ -233,7 +233,7 @@ func fetchDigiGoldData() ([]Currency, error) {
         //return nil
     }
     defer resp.Body.Close()
-
+*/
 	//---------------------------------------------------
 	contentType := resp.Header.Get("Content-Type")
     fmt.Println("Content-Type:", contentType)
