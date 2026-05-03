@@ -255,7 +255,7 @@ if resp.StatusCode != http.StatusOK {
 }*/
 if strings.Contains(resp.Header.Get("Content-Type"), "application/json") == false {
     fmt.Println("html: ",err)
-	fmt.Println("body: ",string(body))
+	//fmt.Println("body: ",string(body))
 	
 	// شاید HTML است
 }
