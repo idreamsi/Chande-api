@@ -178,6 +178,38 @@ func fetchDataCurrency(cm map[string]string) ([]Currency, error) {
 // طلا
 func fetchDigiGoldData() ([]Currency, error) {
 
+//-----------------------------------------------------------------
+    // 1. یک User-Agent واقعی برای مرورگر ست می‌کنیم
+    req, _ := http.NewRequest("GET", "https://api.digikala.com/non-inventory/v1/prices/", nil)
+    req.Header.Set("User-Agent", "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36")
+    req.Header.Set("Accept", "application/json") // صراحتاً اعلام می‌کنیم که JSON می‌خواهیم
+
+    client := &http.Client{}
+    resp, err := client.Do(req)
+    if err != nil {
+        fmt.Println("خطا در درخواست:", err)
+        return
+    }
+    defer resp.Body.Close()
+
+    // 2. بررسی کد وضعیت HTTP
+    fmt.Println("Status Code:", resp.StatusCode) //  403 یا 200 را نشان می‌دهد
+
+    // 3. بررسی هدرها که سرور چه نوع محتوایی برگردانده
+    contentType := resp.Header.Get("Content-Type")
+    fmt.Println("Content-Type:", contentType)
+
+    body, _ := io.ReadAll(resp.Body)
+    // 4. نگاهی به ۵۰۰ کاراکتر اول بدنه می‌اندازیم تا ببینیم HTML است یا JSON
+    fmt.Println("Body (first 500 chars):", string(body[:min(500, len(body))]))
+
+    if strings.Contains(contentType, "application/json") {
+		fmt.Println("IS JSON")
+    } else {
+        fmt.Println("BLOCKED")
+    }
+//-----------------------------------------------------------------
+	
     // درخواست HTTP GET
     resp, err := http.Get("https://api.digikala.com/non-inventory/v1/prices/")
     if err != nil {
