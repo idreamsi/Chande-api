@@ -178,41 +178,57 @@ func fetchDataCurrency(cm map[string]string) ([]Currency, error) {
 }
 
 
-// طلا
+// 
+طلا
+func fetchDigiGoldData() ([]Currency, error) {
+    // لینک عمومی فایل JSON در مخزن
+    url := "https://raw.githubusercontent.com/idreamsi/fetch_and_save_json/refs/heads/main/data/latest.json"
+    
+    // ایجاد درخواست HTTP
+    resp, err := http.Get(url)
+    if err != nil {
+        return nil, fmt.Errorf("خطا در اتصال به لینک: %w", err)
+    }
+    defer resp.Body.Close()
+    
+    // بررسی وضعیت پاسخ
+    if resp.StatusCode != http.StatusOK {
+        return nil, fmt.Errorf("وضعیت ناموفق: %s", resp.Status)
+    }
+    
+    // خواندن بدنه پاسخ
+    body, err := io.ReadAll(resp.Body)
+    if err != nil {
+        return nil, fmt.Errorf("خطا در خواندن داده: %w", err)
+    }
+    
+    // تجزیه JSON
+    var response Response
+    err = json.Unmarshal(body, &response)
+    if err != nil {
+        return nil, fmt.Errorf("خطا در تجزیه JSON: %w", err)
+    }
+    
+    // تبدیل قیمت int به float64
+    digiGoldPrice := float64(response.Gold18.Price)
+    
+    // ساخت خروجی
+    var data []Currency
+    data = append(data, Currency{
+        Code:  "DigiGold",
+        Name:  "طلای دیجی کالا",
+        Price: digiGoldPrice,
+        Icon:  "https://www.digikala.com/wealth/static/img/svg/gold-logo.svg",
+        En:    "DigiGold",
+    })
+    
+    //fmt.Printf("✅ مقدار gold18 از لینک عمومی دریافت شد: %d تومان\n", response.Gold18.Price)
+    return data, nil
+}
+
+/*
 func fetchDigiGoldData() ([]Currency, error) {
 
-//-----------------------------------------------------------------
-    /*
-	// 1. یک User-Agent واقعی برای مرورگر ست می‌کنیم
-    reqq, _ := http.NewRequest("GET", "https://api.digikala.com/non-inventory/v1/prices/", nil)
-    reqq.Header.Set("User-Agent", "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36")
-    reqq.Header.Set("Accept", "application/json") // صراحتاً اعلام می‌کنیم که JSON می‌خواهیم
-
-    client := &http.Client{}
-    respp, errr := client.Do(reqq)
-    if errr != nil {
-        fmt.Println("خطا در درخواست:", err)
-        //return nil
-    }
-    defer respp.Body.Close()
-
-    // 2. بررسی کد وضعیت HTTP
-    fmt.Println("Status Code:", respp.StatusCode) //  403 یا 200 را نشان می‌دهد
-
-    // 3. بررسی هدرها که سرور چه نوع محتوایی برگردانده
-    contentTypee := respp.Header.Get("Content-Type")
-    fmt.Println("Content-Type:", contentTypee)
-
-    bodyy, _ := io.ReadAll(respp.Body)
-    // 4. نگاهی به ۵۰۰ کاراکتر اول بدنه می‌اندازیم تا ببینیم HTML است یا JSON
-    fmt.Println("Body (first 500 chars):", string(bodyy[:min(500, len(bodyy))]))
-
-    if strings.Contains(contentTypee, "application/json") {
-		fmt.Println("IS JSON")
-    } else {
-        fmt.Println("BLOCKED")
-    }
-	*/
 //-----------------------------------------------------------------
 	client := &http.Client{
 	Timeout: 20 * time.Second, }
@@ -226,49 +242,6 @@ func fetchDigiGoldData() ([]Currency, error) {
     }
     defer resp.Body.Close()
 
-	//------------------------------------------------
-	/*
-		client := &http.Client{
-		Timeout: 10 * time.Second, // زمان کل درخواست (اتصال + خواندن)
-		Transport: &http.Transport{
-			TLSClientConfig: &tls.Config{InsecureSkipVerify: true}, // فقط تست
-		},
-	}
-	
-	req, err := http.NewRequest("GET", "https://api.digikala.com/non-inventory/v1/prices/", nil)
-	if err != nil {
-		//outputError("خطا در ساخت درخواست", err.Error())
-		fmt.Println("get: ",err)
-		return nil, err
-	}
-	req.Header.Set("User-Agent", "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:130.0) Gecko/20100101 Firefox/130.0")
-	req.Header.Set("Accept", "application/json, text/plain,")
-	
-	resp, err := client.Do(req)
-	if err != nil {
-		// خطاهایی مثل timeout، DNS، refused و ...
-		fmt.Println("get2: ",err)
-		return nil, err
-	}
-	defer resp.Body.Close()
-*/
-	
-
-
-	
-/*
-	req, _ := http.NewRequest("GET", "https://idreams.ir/bus/gold/", nil)
-    req.Header.Set("User-Agent", "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36")
-    req.Header.Set("Accept", "application/json") // صراحتاً اعلام می‌کنیم که JSON می‌خواهیم
-
-    client := &http.Client{}
-    resp, err := client.Do(req)
-    if err != nil {
-        fmt.Println("خطا در درخواست:", err)
-        //return nil
-    }
-    defer resp.Body.Close()
-*/
 	//---------------------------------------------------
 	contentType := resp.Header.Get("Content-Type")
     fmt.Println("Content-Type:", contentType)
@@ -288,11 +261,7 @@ func fetchDigiGoldData() ([]Currency, error) {
 		//return nil, err
         //return 0, fmt.Errorf("خطا در خواندن بدنه: %w", err)
     }
-	/*
-if resp.StatusCode != http.StatusOK {
-    body, _ := io.ReadAll(resp.Body)
-    return fmt.Errorf("وضعیت ناموفق: %s, بدنه: %s", resp.Status, string(body))
-}*/
+
 if strings.Contains(resp.Header.Get("Content-Type"), "application/json") == false {
     fmt.Println("html: ",err)
 	fmt.Println("body: ",string(body))
@@ -322,7 +291,7 @@ fmt.Println(float64(data2.Gold18.Price))
         })
     return data, nil
 }
-
+*/
 
 // طلا
 func fetchGoldData() ([]Currency, error) {
