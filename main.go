@@ -217,7 +217,8 @@ func fetchDigiGoldData() ([]Currency, error) {
 	client := &http.Client{
 	Timeout: 20 * time.Second, }
     // درخواست HTTP GET
-    resp, err := client.Get("https://idreams.ir/bus/gold/digigold.php")
+    //resp, err := client.Get("https://idreams.ir/bus/gold/digigold.php")
+	resp, err := client.Get("https://api.digikala.com/non-inventory/v1/prices/")
     if err != nil {
 		fmt.Println("get: ",err)
 		return nil, err
