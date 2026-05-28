@@ -178,8 +178,7 @@ func fetchDataCurrency(cm map[string]string) ([]Currency, error) {
 }
 
 
-// 
-طلا
+// طلا
 func fetchDigiGoldData() ([]Currency, error) {
     // لینک عمومی فایل JSON در مخزن
     url := "https://raw.githubusercontent.com/idreamsi/fetch_and_save_json/refs/heads/main/data/latest.json"
