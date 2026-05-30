@@ -202,7 +202,7 @@ func fetchDigiGoldData() ([]Currency, error) {
     if err != nil {
         return nil, fmt.Errorf("خطا در تجزیه JSON: %w", err)
     }
-    
+    /*
     // تبدیل قیمت int به float64
     digiGoldPrice := float64(response.Gold18.Price)
 	digiSilverPrice := float64(response.Silver999.Price)
@@ -216,77 +216,35 @@ func fetchDigiGoldData() ([]Currency, error) {
         Icon:  "https://www.digikala.com/wealth/static/img/svg/gold-asset-box.webp",
         En:    "DigiGold",
     })
+*/
+	var data []Currency
+    
+    // اضافه کردن طلا
+    digiGoldPrice := float64(response.Gold18.Price)
+    data = append(data, Currency{
+        Code:  "DigiGold",
+        Name:  "طلای دیجی کالا",
+        Price: digiGoldPrice,
+        Icon:  "https://www.digikala.com/wealth/static/img/svg/gold-asset-box.webp",
+        En:    "DigiGold",
+    })
+    
+    // اضافه کردن نقره
+    silverPrice := float64(response.Silver999.Price)
+    data = append(data, Currency{
+        Code:  "DigiSilver",
+        Name:  "نقره دیجی کالا",
+        Price: silverPrice,
+        Icon:  "https://www.digikala.com/wealth/static/img/svg/silver-asset-box.webp", // در صورت وجود آیکون واقعی جایگزین کنید
+        En:    "DigiSilver",
+    })
+	
     
     //fmt.Printf("✅ مقدار gold18 از لینک عمومی دریافت شد: %d تومان\n", response.Gold18.Price)
     return data, nil
 }
 //Icon:  "https://www.digikala.com/wealth/static/img/svg/gold-logo.svg",
-/*
-func fetchDigiGoldData() ([]Currency, error) {
 
-//-----------------------------------------------------------------
-	client := &http.Client{
-	Timeout: 20 * time.Second, }
-    // درخواست HTTP GET
-    resp, err := client.Get("https://idreams.ir/bus/gold/digigold.php")
-	//resp, err := client.Get("https://api.digikala.com/non-inventory/v1/prices/")
-    if err != nil {
-		fmt.Println("get: ",err)
-		return nil, err
-        //return 0, fmt.Errorf("خطا در ارسال درخواست: %w", err)
-    }
-    defer resp.Body.Close()
-
-	//---------------------------------------------------
-	contentType := resp.Header.Get("Content-Type")
-    fmt.Println("Content-Type:", contentType)
-	if strings.Contains(contentType, "application/json") {
-		fmt.Println("IS JSON")
-    } else {
-        fmt.Println("IS HTML")
-    }
-	//---------------------------------------------------
-	    // بررسی وضعیت پاسخ
-    
-
-    // خواندن بدنه پاسخ
-    body, err := io.ReadAll(resp.Body)
-    if err != nil {
-		fmt.Println("io: ",err)
-		//return nil, err
-        //return 0, fmt.Errorf("خطا در خواندن بدنه: %w", err)
-    }
-
-if strings.Contains(resp.Header.Get("Content-Type"), "application/json") == false {
-    fmt.Println("html: ",err)
-	fmt.Println("body: ",string(body))
-	
-	// شاید HTML است
-}
-    // تجزیه JSON
-    var data2 Response
-    err = json.Unmarshal(body, &data2)
-    if err != nil {
-		fmt.Println("json: ",err)
-		//return nil, err
-        //return 0, fmt.Errorf("خطا در تجزیه JSON: %w", err)
-    }
-
-    // بازگرداندن قیمت gold18
-    //return data.Gold18.Price, nil
-fmt.Println("Test")
-fmt.Println(float64(data2.Gold18.Price))
-    var data []Currency
-	data = append(data, Currency{
-        Code:  "DigiGold",
-        Name:  "طلای دیجی کالا",
-        Price: float64(data2.Gold18.Price),
-        Icon:  "https://www.digikala.com/wealth/static/img/svg/gold-logo.svg",
-        En:    "DigiGold",
-        })
-    return data, nil
-}
-*/
 
 // طلا
 func fetchGoldData() ([]Currency, error) {
