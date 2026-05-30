@@ -212,14 +212,14 @@ func fetchDigiGoldData() ([]Currency, error) {
         Code:  "DigiGold",
         Name:  "طلای دیجی کالا",
         Price: digiGoldPrice,
-        Icon:  "https://www.digikala.com/wealth/static/img/svg/gold-logo.svg",
+        Icon:  "https://www.digikala.com/wealth/static/img/svg/gold-asset-box.webp",
         En:    "DigiGold",
     })
     
     //fmt.Printf("✅ مقدار gold18 از لینک عمومی دریافت شد: %d تومان\n", response.Gold18.Price)
     return data, nil
 }
-
+//Icon:  "https://www.digikala.com/wealth/static/img/svg/gold-logo.svg",
 /*
 func fetchDigiGoldData() ([]Currency, error) {
 
