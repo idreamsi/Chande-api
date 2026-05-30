@@ -205,7 +205,8 @@ func fetchDigiGoldData() ([]Currency, error) {
     
     // تبدیل قیمت int به float64
     digiGoldPrice := float64(response.Gold18.Price)
-    
+	digiSilverPrice := float64(response.Silver999.Price)
+	
     // ساخت خروجی
     var data []Currency
     data = append(data, Currency{
